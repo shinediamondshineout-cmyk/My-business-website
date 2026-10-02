@@ -1,9 +1,9 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShineBiz - Find Businesses Worldwide</title>
+<title>ShineBiz - Worldwide</title>
 <style>
 body{font-family:Arial,sans-serif;margin:0;background:#f5f5ff;}
 .header{background:#6a5acd;color:white;padding:20px;text-align:center;}
@@ -12,7 +12,7 @@ input,select,textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;bo
 .city-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0;}
 .city-tag{padding:6px 12px;background:#eee;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid #ddd;}
 .city-tag.active{background:#6a5acd;color:white;}
-.btn{width:100%;padding:14px;background:#6a5acd;color:white;border:none;border-radius:10px;font-size:16px;cursor:pointer;font-weight:bold;}
+.btn{width:100%;padding:14px;background:#6a5acd;color:white;border:none;border-radius:10px;font-size:16px;cursor:pointer;font-weight:bold;margin-top:5px;}
 .btn-whatsapp{background:#25D366;}
 .business-card{background:white;margin:15px;padding:15px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
 </style>
@@ -21,82 +21,61 @@ input,select,textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;bo
 
 <div class="header">
 <h1>✨ ShineBiz</h1>
-<p>Find Businesses in Benin, Bayelsa, PH, All Nigeria & Worldwide 🌍</p>
-<p style="font-size:14px;">📍 From Local to Global - For EVERYONE</p>
+<p>Benin | Bayelsa | Port Harcourt | All Nigeria | Worldwide 🌍</p>
 </div>
 
 <div class="search-box">
-<input id="searchInput" type="text" placeholder="🔍 Search any city: Lagos, Bayelsa, London, Dubai, New York..." onkeyup="filterBiz()">
-
+<input id="searchInput" type="text" placeholder="🔍 Search any city: Lagos, Bayelsa, London, Dubai..." onkeyup="filterBiz()">
 <div class="city-tags">
 <span class="city-tag active" onclick="setCity('All')">🌍 All</span>
+<span class="city-tag" onclick="setCity('Port Harcourt')">PH</span>
 <span class="city-tag" onclick="setCity('Benin City')">Benin</span>
 <span class="city-tag" onclick="setCity('Bayelsa')">Bayelsa</span>
-<span class="city-tag" onclick="setCity('Port Harcourt')">PH</span>
 <span class="city-tag" onclick="setCity('Lagos')">Lagos</span>
-<span class="city-tag" onclick="setCity('Abuja')">Abuja</span>
 <span class="city-tag" onclick="setCity('London')">London</span>
-<span class="city-tag" onclick="setCity('USA')">USA</span>
 </div>
-
 <select id="cityFilter" onchange="filterBiz()">
 <option value="All">All Nigeria (36 States) + Worldwide</option>
-<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
-<option>Anambra</option><option>Bauchi</option><option>Bayelsa - Yenagoa</option>
-<option>Benue</option><option>Borno</option><option>Cross River</option>
-<option>Delta</option><option>Ebonyi</option><option>Edo - Benin City</option>
-<option>Ekiti</option><option>Enugu</option><option>Gombe</option>
-<option>Imo</option><option>Jigawa</option><option>Kaduna</option>
-<option>Kano</option><option>Katsina</option><option>Kebbi</option>
-<option>Kogi</option><option>Kwara</option><option>Lagos</option>
-<option>Nasarawa</option><option>Niger</option><option>Ogun</option>
-<option>Ondo</option><option>Osun</option><option>Oyo</option>
-<option>Plateau</option><option>Rivers - Port Harcourt</option>
-<option>Sokoto</option><option>Taraba</option><option>Yobe</option>
-<option>Zamfara</option><option>FCT - Abuja</option>
-<option>🌍 UK - London</option><option>🌍 USA - New York</option>
-<option>🌍 UAE - Dubai</option><option>🌍 Canada</option>
-<option>🌍 Ghana</option><option>🌍 South Africa</option>
-<option>🌍 Other International</option>
+<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo - Benin City</option><option>Ekiti</option><option>Enugu</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers - Port Harcourt</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option><option>FCT - Abuja</option>
+<option>UK - London</option><option>USA</option><option>UAE - Dubai</option><option>Canada</option><option>Ghana</option><option>South Africa</option><option>Other International</option>
 </select>
 </div>
 
 <div id="businessList">
-<div class="business-card" data-city="Benin City Edo">
-<h3>💈 Shine Beauty Salon</h3>
-<p>📍 Benin City, Edo | Beauty</p>
-<p>📞 0803 123 4567</p>
+<div class="business-card" data-city="Port Harcourt Abuloma Rivers Sunshine Beauty Salon" style="border:2px solid #6a5acd;">
+<h3>💈 Sunshine Beauty Salon - Abuloma 💖</h3>
+<p>📍 Abuloma, Port Harcourt, Rivers State</p>
+<p>Beauty, Hair, Makeup, Nails</p>
+<p>📞 0814 113 5380</p>
+<button class="btn btn-whatsapp" onclick="window.open('https://wa.me/2348141135380?text=Hello%20Sunshine%20Beauty%20Salon%20in%20Abuloma,%20I%20found%20you%20on%20ShineBiz!','_blank')">💬 Chat on WhatsApp - 0814 113 5380</button>
 </div>
-<div class="business-card" data-city="Bayelsa Yenagoa">
-<h3>🍲 Bayelsa Kitchen</h3>
-<p>📍 Yenagoa, Bayelsa | Restaurant</p>
-</div>
-<div class="business-card" data-city="Port Harcourt Rivers">
-<h3>👗 PH Fashion Hub</h3>
-<p>📍 Port Harcourt, Rivers | Fashion</p>
-</div>
+
+<div class="business-card" data-city="Benin City Edo"><h3>💈 Shine Beauty Salon</h3><p>📍 Benin City</p></div>
+<div class="business-card" data-city="Bayelsa Yenagoa"><h3>🍲 Bayelsa Kitchen</h3><p>📍 Yenagoa, Bayelsa</p></div>
+<div class="business-card" data-city="Port Harcourt Rivers"><h3>👗 PH Fashion Hub</h3><p>📍 Port Harcourt</p></div>
 </div>
 
 <div style="background:white;margin:15px;padding:20px;border-radius:15px;">
-<h3 style="text-align:center;">➕ Add Your Business - ANY CITY!</h3>
+<h3 style="text-align:center;">➕ Add Your Business - ANY CITY IN THE WORLD!</h3>
+<p style="text-align:center;font-size:12px;color:gray;">Everyone will see it instantly!</p>
 <input id="bName" placeholder="Business Name">
-<input id="bCity" placeholder="City - Type ANY city in the world">
-<select id="bState">
-<option value="">Select State/Country</option>
-<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo - Benin City</option><option>Ekiti</option><option>Enugu</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers - Port Harcourt</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option><option>FCT - Abuja</option>
-<option>UK - London</option><option>USA</option><option>Dubai</option><option>Canada</option><option>Ghana</option><option>South Africa</option><option>Other International</option>
-</select>
-<input id="bPhone" placeholder="WhatsApp Number">
+<input id="bCity" placeholder="City - Example: Abuloma, Bayelsa, London...">
+<select id="bState"><option value="">Select State/Country</option><option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo - Benin City</option><option>Ekiti</option><option>Enugu</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers - Port Harcourt</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option><option>FCT - Abuja</option><option>UK - London</option><option>USA</option><option>Dubai</option><option>Canada</option><option>Ghana</option><option>Other International</option></select>
+<input id="bPhone" placeholder="Your WhatsApp Number">
 <textarea id="bDesc" placeholder="What do you sell?"></textarea>
-<button class="btn" onclick="addBusiness()">Add Business - For Everyone!</button>
+<button class="btn" onclick="addBusiness()">Add Business - Everyone Can See!</button>
 </div>
 
 <div style="text-align:center;padding:20px;color:gray;font-size:13px;">
-<p>👁️ <span id="visitCount">3</span> businesses | ShineBiz 🌍 Worldwide</p>
-<p>📍 Benin | Bayelsa | Port Harcourt | All Nigeria | World</p>
+<p>👁️ <span id="visitCount">4</span> businesses | ShineBiz Worldwide 🌍</p>
+<p>📍 Sunshine Beauty Salon - Abuloma, PH - 0814 113 5380</p>
 </div>
 
 <script>
+// Load saved businesses
+let saved = JSON.parse(localStorage.getItem('shinebiz')||'[]');
+saved.forEach(b=>{createCard(b.name,b.city+' '+b.state,b.desc,b.phone,true)});
+
 function setCity(city){
  document.getElementById('cityFilter').value=city;
  document.getElementById('searchInput').value=city==='All'?'':city;
@@ -107,25 +86,47 @@ function filterBiz(){
  let city=document.getElementById('cityFilter').value.toLowerCase();
  document.querySelectorAll('.business-card').forEach(card=>{
   let txt=(card.innerText+card.getAttribute('data-city')).toLowerCase();
-  let show = txt.includes(search) && (city==='all' || txt.includes(city) || city.includes('world') || city.includes('international'));
+  let show = city==='all' ? txt.includes(search) : (txt.includes(search) && txt.includes(city));
   if(city==='all') show = txt.includes(search);
   card.style.display = show ? 'block' : 'none';
  });
+ // Notify owner about search
+ if(search.length>2){
+   console.log('User searched: '+search);
+ }
+}
+function createCard(name,city,desc,phone,skipSave){
+ let list=document.getElementById('businessList');
+ let div=document.createElement('div');
+ div.className='business-card';
+ div.setAttribute('data-city',city);
+ let waLink = phone ? `https://wa.me/234${phone.slice(-10)}?text=Hello%20${encodeURIComponent(name)}%20I%20found%20you%20on%20ShineBiz!` : '';
+ div.innerHTML=`<h3>✨ ${name}</h3><p>📍 ${city}</p><p>${desc}</p>${phone?`<p>📞 ${phone}</p><button class='btn btn-whatsapp' onclick=\"window.open('${waLink}','_blank')\">💬 Chat on WhatsApp</button>`:''}`;
+ list.prepend(div);
 }
 function addBusiness(){
  let name=document.getElementById('bName').value;
  let city=document.getElementById('bCity').value;
  let state=document.getElementById('bState').value;
- if(!name||!city){alert('Enter Name and ANY city!');return;}
- let list=document.getElementById('businessList');
- let div=document.createElement('div');
- div.className='business-card';
- div.setAttribute('data-city',city+' '+state);
- div.innerHTML=`<h3>✨ ${name}</h3><p>📍 ${city}, ${state}</p><p>${document.getElementById('bDesc').value}</p>`;
- list.prepend(div);
- alert('Added! Now everyone in the world can see '+name+' in '+city+'!');
+ let phone=document.getElementById('bPhone').value;
+ let desc=document.getElementById('bDesc').value;
+ if(!name||!city){alert('Enter Name and City!');return;}
+ 
+ // Save for everyone to see (local)
+ let biz={name,city,state,phone,desc};
+ let all=JSON.parse(localStorage.getItem('shinebiz')||'[]');
+ all.unshift(biz);
+ localStorage.setItem('shinebiz',JSON.stringify(all));
+ createCard(name,city+' '+state,desc,phone,true);
+ 
+ // NOTIFY YOU on 07081222972
+ let msg=`🔔 NEW BUSINESS on ShineBiz!%0A%0AName: ${encodeURIComponent(name)}%0ACity: ${encodeURIComponent(city+', '+state)}%0APhone: ${phone}%0ADesc: ${encodeURIComponent(desc)}%0A%0ACheck your website!`;
+ window.open(`https://wa.me/2347081222972?text=${msg}`,'_blank');
+ 
+ alert('Added! '+name+' in '+city+' is now live! And I notified you on 07081222972');
  document.getElementById('visitCount').innerText=document.querySelectorAll('.business-card').length;
+ document.getElementById('bName').value='';document.getElementById('bCity').value='';document.getElementById('bPhone').value='';document.getElementById('bDesc').value='';
 }
 </script>
 </body>
-</html>￼Enter
+ </html>

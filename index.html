@@ -1,2 +1,131 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ShineBiz - Promote & Find Local Businesses</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#0f0f14;color:#fff;line-height:1.6}header{background:#1a1a24;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;border-bottom:1px solid #2a2a3a}.logo{font-weight:800;font-size:20px;color:#00ffa3}.logo span{color:#fff}.btn{background:#00ffa3;color:#000;padding:10px 18px;border-radius:30px;font-weight:700;border:none;cursor:pointer}.hero{padding:60px 20px;text-align:center;background:radial-gradient(circle at 30% 20%,#1e3a2f 0%,#0f0f14 60%)}.hero h1{font-size:32px;max-width:600px;margin:0 auto 12px}.hero h1 span{color:#00ffa3}.hero p{color:#a0a0b5;max-width:550px;margin:0 auto 22px}.search-box{max-width:520px;margin:20px auto;background:#1e1e2c;display:flex;border-radius:40px;padding:6px;border:1px solid #333}.search-box input{flex:1;background:transparent;border:none;color:#fff;padding:12px 18px;outline:none;font-size:16px}.search-box button{background:#00ffa3;border:none;border-radius:30px;padding:10px 20px;font-weight:700;cursor:pointer}.cats{display:flex;gap:10px;overflow-x:auto;justify-content:center;padding:20px;flex-wrap:wrap}.cat{border:1px solid #333;padding:8px 16px;border-radius:30px;font-size:13px;cursor:pointer;background:#1a1a24;white-space:nowrap}.cat.active{background:#00ffa3;color:#000;font-weight:700}.section{padding:25px 20px;max-width:1100px;margin:0 auto}.grid{display:grid;grid-template-columns:1fr;gap:14px}@media(min-width:700px){.grid{grid-template-columns:1fr 1fr 1fr}.hero h1{font-size:44px}}.card{background:#1c1c28;border:1px solid #2d2d3f;border-radius:16px;padding:16px}.card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.badge{font-size:11px;background:#2a2a3a;padding:4px 10px;border-radius:20px;color:#00ffa3}.card h3{font-size:16px;margin:4px 0}.card p{font-size:13px;color:#9a9ab0;margin:6px 0 12px;min-height:36px}.card .actions{display:flex;gap:8px}.wa{background:#25D366;color:#fff;padding:8px 12px;border-radius:20px;font-size:13px;text-decoration:none;font-weight:600;flex:1;text-align:center}.view{border:1px solid #333;color:#fff;padding:8px 12px;border-radius:20px;font-size:13px;text-decoration:none;flex:1;text-align:center}.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}.modal.open{display:flex}.form{background:#1e1e2c;width:100%;max-width:480px;border-radius:18px;padding:22px;border:1px solid #333}.form h3{margin-bottom:12px}.form input,.form select,.form textarea{width:100%;padding:12px;background:#12121a;border:1px solid #333;border-radius:10px;color:#fff;margin:7px 0;font-size:14px;outline:none}.form button{width:100%;margin-top:10px}.close{float:right;cursor:pointer;font-size:22px}footer{text-align:center;padding:40px 20px;color:#666;font-size:13px;border-top:1px solid #1f1f2f;margin-top:30px}</style></head><body><header><div class="logo">Shine<span>Biz</span></div><button class="btn" onclick="openModal()">+ Add Business</button></header><div class="hero"><h1>Find <span>Local Businesses</span> or Promote Yours Free</h1><p>ShineBiz helps customers discover you. List your business in 30 seconds and get calls on WhatsApp instantly.</p><div class="search-box"><input id="search" type="text" placeholder="Search business, e.g. Hair, Food, Fashion..." oninput="render()"><button onclick="render()">Search</button></div></div><div class="cats"><div class="cat active" onclick="filterCat('All',this)">All</div><div class="cat" onclick="filterCat('Fashion',this)">Fashion</div><div class="cat" onclick="filterCat('Beauty',this)">Beauty</div><div class="cat" onclick="filterCat('Food',this)">Food & Drinks</div><div class="cat" onclick="filterCat('Tech',this)">Tech & Services</div><div class="cat" onclick="filterCat('Health',this)">Health</div><div class="cat" onclick="filterCat('Education',this)">Education</div></div><div class="section"><h2>🔥 Featured Businesses</h2><div class="grid" id="grid"></div></div><div class="modal" id="modal"><div class="form"><span class="close" onclick="closeModal()">&times;</span><h3>Promote Your Business</h3><input id="bizName" placeholder="Business Name *"><select id="bizCat"><option value="Fashion">Fashion</option><option value="Beauty">Beauty</option><option value="Food">Food & Drinks</option><option value="Tech">Tech & Services</option><option value="Health">Health</option><option value="Education">Education</option><option value="Other">Other</option></select><input id="bizLoc" placeholder="Location, e.g. Benin City"><input id="bizWa" placeholder="WhatsApp Number, e.g. 2348012345678"><textarea id="bizDesc" rows="3" placeholder="What do you do? Tell customers..."></textarea><button class="btn" onclick="addBiz()">Publish Business 🚀</button></div></div><footer>Built on GitHub Pages • ShineBiz © 2026</footer><script>let activeCat='All';let businesses=JSON.parse(localStorage.getItem('shinebiz')||'null')||[{name:"Shine Diamond Hair",cat:"Beauty",loc:"Benin City, Edo",desc:"Quality wigs, frontal installs & hair sales. Wholesale & retail.",wa:"234000000000"},{name:"Carmen Fashion Store",cat:"Fashion",loc:"Lagos",desc:"Trendy wears for ladies. Delivery nationwide.",wa:"234000000001"},{name:"Quick Bites",cat:"Food",loc:"Benin",desc:"Best shawarma & small chops in town. Order now!",wa:"234000000002"}];function filterCat(c,el){activeCat=c;document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));el.classList.add('active');render()}function render(){let q=document.getElementById('search').value.toLowerCase();let f=businesses.filter(b=>{let matchCat=activeCat==='All'||b.cat===activeCat;let matchSearch=!q||b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)||b.cat.toLowerCase().includes(q);return matchCat&&matchSearch});document.getElementById('grid').innerHTML=f.map(b=>`<div class="card"><div class="top"><span class="badge">${b.cat}</span><span style="font-size:12px;color:#777">${b.loc}</span></div><h3>${b.name}</h3><p>${b.desc}</p><div class="actions"><a class="wa" href="https://wa.me/${b.wa}?text=Hi%20${encodeURIComponent(b.name)}%20I%20found%20you%20on%20ShineBiz" target="_blank">WhatsApp</a><a class="view" href="#">View</a></div></div>`).join('')||'<p style="color:#777">No business found. Be the first to add!</p>'}function openModal(){document.getElementById('modal').classList.add('open')}function closeModal(){document.getElementById('modal').classList.remove('open')}function addBiz(){let name=document.getElementById('bizName').value.trim();let cat=document.getElementById('bizCat').value;let loc=document.getElementById('bizLoc').value.trim()||'Nigeria';let wa=document.getElementById('bizWa').value.trim()||'234000000000';let desc=document.getElementById('bizDesc').value.trim()||'We offer quality service.';if(!name){alert('Enter business name');return}businesses.unshift({name,cat,loc,wa,desc});localStorage.setItem('shinebiz',JSON.stringify(businesses));closeModal();render();document.getElementById('bizName').value='';document.getElementById('bizDesc').value=''}render();</script></body></html>￼Enter
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShineBiz - Find Businesses Worldwide</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f5f5ff;}
+.header{background:#6a5acd;color:white;padding:20px;text-align:center;}
+.search-box{background:white;margin:-20px 15px 15px 15px;padding:20px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+input,select,textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd;box-sizing:border-box;}
+.city-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0;}
+.city-tag{padding:6px 12px;background:#eee;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid #ddd;}
+.city-tag.active{background:#6a5acd;color:white;}
+.btn{width:100%;padding:14px;background:#6a5acd;color:white;border:none;border-radius:10px;font-size:16px;cursor:pointer;font-weight:bold;}
+.btn-whatsapp{background:#25D366;}
+.business-card{background:white;margin:15px;padding:15px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1>✨ ShineBiz</h1>
+<p>Find Businesses in Benin, Bayelsa, PH, All Nigeria & Worldwide 🌍</p>
+<p style="font-size:14px;">📍 From Local to Global - For EVERYONE</p>
+</div>
+
+<div class="search-box">
+<input id="searchInput" type="text" placeholder="🔍 Search any city: Lagos, Bayelsa, London, Dubai, New York..." onkeyup="filterBiz()">
+
+<div class="city-tags">
+<span class="city-tag active" onclick="setCity('All')">🌍 All</span>
+<span class="city-tag" onclick="setCity('Benin City')">Benin</span>
+<span class="city-tag" onclick="setCity('Bayelsa')">Bayelsa</span>
+<span class="city-tag" onclick="setCity('Port Harcourt')">PH</span>
+<span class="city-tag" onclick="setCity('Lagos')">Lagos</span>
+<span class="city-tag" onclick="setCity('Abuja')">Abuja</span>
+<span class="city-tag" onclick="setCity('London')">London</span>
+<span class="city-tag" onclick="setCity('USA')">USA</span>
+</div>
+
+<select id="cityFilter" onchange="filterBiz()">
+<option value="All">All Nigeria (36 States) + Worldwide</option>
+<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+<option>Anambra</option><option>Bauchi</option><option>Bayelsa - Yenagoa</option>
+<option>Benue</option><option>Borno</option><option>Cross River</option>
+<option>Delta</option><option>Ebonyi</option><option>Edo - Benin City</option>
+<option>Ekiti</option><option>Enugu</option><option>Gombe</option>
+<option>Imo</option><option>Jigawa</option><option>Kaduna</option>
+<option>Kano</option><option>Katsina</option><option>Kebbi</option>
+<option>Kogi</option><option>Kwara</option><option>Lagos</option>
+<option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+<option>Ondo</option><option>Osun</option><option>Oyo</option>
+<option>Plateau</option><option>Rivers - Port Harcourt</option>
+<option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+<option>Zamfara</option><option>FCT - Abuja</option>
+<option>🌍 UK - London</option><option>🌍 USA - New York</option>
+<option>🌍 UAE - Dubai</option><option>🌍 Canada</option>
+<option>🌍 Ghana</option><option>🌍 South Africa</option>
+<option>🌍 Other International</option>
+</select>
+</div>
+
+<div id="businessList">
+<div class="business-card" data-city="Benin City Edo">
+<h3>💈 Shine Beauty Salon</h3>
+<p>📍 Benin City, Edo | Beauty</p>
+<p>📞 0803 123 4567</p>
+</div>
+<div class="business-card" data-city="Bayelsa Yenagoa">
+<h3>🍲 Bayelsa Kitchen</h3>
+<p>📍 Yenagoa, Bayelsa | Restaurant</p>
+</div>
+<div class="business-card" data-city="Port Harcourt Rivers">
+<h3>👗 PH Fashion Hub</h3>
+<p>📍 Port Harcourt, Rivers | Fashion</p>
+</div>
+</div>
+
+<div style="background:white;margin:15px;padding:20px;border-radius:15px;">
+<h3 style="text-align:center;">➕ Add Your Business - ANY CITY!</h3>
+<input id="bName" placeholder="Business Name">
+<input id="bCity" placeholder="City - Type ANY city in the world">
+<select id="bState">
+<option value="">Select State/Country</option>
+<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo - Benin City</option><option>Ekiti</option><option>Enugu</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers - Port Harcourt</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option><option>FCT - Abuja</option>
+<option>UK - London</option><option>USA</option><option>Dubai</option><option>Canada</option><option>Ghana</option><option>South Africa</option><option>Other International</option>
+</select>
+<input id="bPhone" placeholder="WhatsApp Number">
+<textarea id="bDesc" placeholder="What do you sell?"></textarea>
+<button class="btn" onclick="addBusiness()">Add Business - For Everyone!</button>
+</div>
+
+<div style="text-align:center;padding:20px;color:gray;font-size:13px;">
+<p>👁️ <span id="visitCount">3</span> businesses | ShineBiz 🌍 Worldwide</p>
+<p>📍 Benin | Bayelsa | Port Harcourt | All Nigeria | World</p>
+</div>
+
+<script>
+function setCity(city){
+ document.getElementById('cityFilter').value=city;
+ document.getElementById('searchInput').value=city==='All'?'':city;
+ filterBiz();
+}
+function filterBiz(){
+ let search=document.getElementById('searchInput').value.toLowerCase();
+ let city=document.getElementById('cityFilter').value.toLowerCase();
+ document.querySelectorAll('.business-card').forEach(card=>{
+  let txt=(card.innerText+card.getAttribute('data-city')).toLowerCase();
+  let show = txt.includes(search) && (city==='all' || txt.includes(city) || city.includes('world') || city.includes('international'));
+  if(city==='all') show = txt.includes(search);
+  card.style.display = show ? 'block' : 'none';
+ });
+}
+function addBusiness(){
+ let name=document.getElementById('bName').value;
+ let city=document.getElementById('bCity').value;
+ let state=document.getElementById('bState').value;
+ if(!name||!city){alert('Enter Name and ANY city!');return;}
+ let list=document.getElementById('businessList');
+ let div=document.createElement('div');
+ div.className='business-card';
+ div.setAttribute('data-city',city+' '+state);
+ div.innerHTML=`<h3>✨ ${name}</h3><p>📍 ${city}, ${state}</p><p>${document.getElementById('bDesc').value}</p>`;
+ list.prepend(div);
+ alert('Added! Now everyone in the world can see '+name+' in '+city+'!');
+ document.getElementById('visitCount').innerText=document.querySelectorAll('.business-card').length;
+}
+</script>
+</body>
+</html>￼Enter
